@@ -1,1 +1,1 @@
-name,algorithm,comprehensive,diverse
+name,algorithm,comprehensive,diverse,speculate,advent,aspire,plough,revoke,evoke,basin
