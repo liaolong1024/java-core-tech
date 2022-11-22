@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 /**
  * @author ll
  */
-public class LimitSkipTakeWhile {
+public class LimitSkipConcat {
     public static void main(String[] args) {
         // 只要前几个元素
         Stream<Double> limit = Stream.generate(Math::random).limit(10);

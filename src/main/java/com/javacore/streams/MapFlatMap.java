@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -17,9 +16,9 @@ import java.util.stream.Stream;
  *
  * @author ll
  */
-public class StreamConvert2Another {
+public class MapFlatMap {
     public static void main(String[] args) throws URISyntaxException, IOException {
-        Path path = Paths.get(StreamConvert2Another.class.getResource("words.txt").toURI());
+        Path path = Paths.get(MapFlatMap.class.getResource("words.txt").toURI());
         String contents = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
         List<String> words = new ArrayList<>(10);
         Collections.addAll(words, contents.split(","));
@@ -28,9 +27,9 @@ public class StreamConvert2Another {
         Stream<String> lowerCaseWords = words.stream().map(String::toLowerCase);
 
         // 使用map处理后返回一个由多个流元素组成的流
-        Stream<Stream<String>> streamStream = words.stream().map(StreamConvert2Another::codePoints);
+        Stream<Stream<String>> streamStream = words.stream().map(MapFlatMap::codePoints);
         // 使用flagMap, 由[元素 -> 流]映射产生的多个流, 再将这些流摊平->一个流
-        Stream<String> flatResult = words.stream().flatMap(StreamConvert2Another::codePoints);
+        Stream<String> flatResult = words.stream().flatMap(MapFlatMap::codePoints);
         System.out.println(streamStream.count());
         System.out.println(flatResult.count());
     }

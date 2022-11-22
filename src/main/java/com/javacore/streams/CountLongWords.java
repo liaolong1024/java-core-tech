@@ -18,15 +18,15 @@ import java.util.List;
  */
 public class CountLongWords {
     public static void main(String[] args) throws IOException, URISyntaxException {
-        URL resource = CountLongWords.class.getResource("words.txt");
-        System.out.println(resource);
-        String contents = new String(
-                Files.readAllBytes(Paths.get(resource.toURI())),
-                StandardCharsets.UTF_8
-        );
-        List<String> words = new ArrayList<>(10);
-        Collections.addAll(words, contents.split(","));
+        // URL resource = CountLongWords.class.getResource("words.txt");
+        // System.out.println(resource);
+        // String contents = new String(
+        //         Files.readAllBytes(Paths.get(resource.toURI())),
+        //         StandardCharsets.UTF_8
+        // );
+        // Collections.addAll(words, contents.split(","));
 
+        List<String> words = getWords();
         long count = 0;
         for (String word : words) {
             if (word.length()>12) count++;
@@ -38,5 +38,17 @@ public class CountLongWords {
 
         count = words.parallelStream().filter(w->w.length()>12).count();
         System.out.println(count);
+    }
+
+    public static List<String> getWords() throws URISyntaxException, IOException {
+        URL resource = CountLongWords.class.getResource("words.txt");
+        System.out.println(resource);
+        String contents = new String(
+                Files.readAllBytes(Paths.get(resource.toURI())),
+                StandardCharsets.UTF_8
+        );
+        List<String> words = new ArrayList<>(10);
+        Collections.addAll(words, contents.split(","));
+        return words;
     }
 }
